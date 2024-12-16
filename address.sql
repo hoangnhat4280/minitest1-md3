@@ -8,13 +8,4 @@ INSERT INTO Address (address) VALUES
 ('Phú Quốc');
 
 -- thong ke sluong hoc vien cac tinh
-SELECT 
-    a.address AS province,
-    COUNT(s.id) AS student_count
-FROM 
-    Students s
-JOIN 
-    Address a ON s.address_id = a.id
-GROUP BY 
-    s.address_id;
-
+SELECT address_id, COUNT(id) AS student_count FROM Students GROUP BY address_id;

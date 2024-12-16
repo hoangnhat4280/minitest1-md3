@@ -7,26 +7,13 @@ INSERT INTO Classes (name, language, description) VALUES
 ('Design', 'English', 'Khóa học thiết kế đồ họa'),
 ('Lịch sử', 'Vietnamese', 'Lớp học lịch sử');
 
--- thong ke sluong hoc sinh của cac lop
-SELECT 
-    c.name AS class_name,
-    COUNT(s.id) AS student_count
-FROM 
-    Students s
-JOIN 
-    Classes c ON s.classes_id = c.id
-GROUP BY 
-    s.classes_id;
-    
--- dtb cua cac khoa hoc
-    SELECT 
-    c.name AS course_name,
-    AVG(p.point) AS average_point
-FROM 
-    Point p
-JOIN 
-    Course c ON p.course_id = c.id
-GROUP BY 
-    p.course_id;
+-- thong ke sluong hoc vien cac lop
+SELECT classes_id, COUNT(id) AS student_count FROM Students GROUP BY classes_id;
+
+-- dtb cac khoa hoc
+SELECT course_id, AVG(point) AS avg_point FROM Point GROUP BY course_id;
+
+-- khoa hoc dtb cao nhat
+SELECT course_id, AVG(point) AS avg_point FROM Point GROUP BY course_id ORDER BY avg_point DESC LIMIT 1;
 
 
