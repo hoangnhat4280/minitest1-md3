@@ -14,6 +14,12 @@ SELECT classes_id, COUNT(id) AS student_count FROM Students GROUP BY classes_id;
 SELECT course_id, AVG(point) AS avg_point FROM Point GROUP BY course_id;
 
 -- khoa hoc dtb cao nhat
-SELECT course_id, AVG(point) AS avg_point FROM Point GROUP BY course_id ORDER BY avg_point DESC LIMIT 1;
-
-
+SELECT course_id, AVG(point) AS avg_point FROM Point GROUP BY course_id
+HAVING AVG(point) = (
+    SELECT MAX(avg_point)
+    FROM (
+        SELECT AVG(point) AS avg_point
+        FROM Point
+        GROUP BY course_id
+    ) AS subquery
+);
